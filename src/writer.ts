@@ -43,9 +43,9 @@ export class CnabWriter extends Cnab {
 
     _prepareColumnValue(value_: string, config: ColumnLayoutInterface) {
         // check undefined
-        this._checkValueUndefined(value_, config);
+        this._checkValueInvalid(value_, config);
         // to string
-        let value = value_ === undefined ? '' : value_ + '';
+        let value = value_ === undefined || value_ === null ? '' : value_ + '';
         // check fill
         this._checkValueFill(value, config);
         // check length
@@ -65,10 +65,13 @@ export class CnabWriter extends Cnab {
         return value;
     }
 
-    _checkValueUndefined(value: any, config: ColumnLayoutInterface) {
+    _checkValueInvalid(value: any, config: ColumnLayoutInterface) {
         if (config.required === COLUMN_REQUIREMENT.IGNORED) return;
         if (value === undefined) {
             throw new Err(`Value for column "${config.key}" is undefined`, ERROR_CODE.COLUMN_VALUE_UNDEFINED);
+        }
+        if (value === null) {
+            throw new Err(`Value for column "${config.key}" is NULL`, ERROR_CODE.COLUMN_VALUE_NULL);
         }
     }
 
