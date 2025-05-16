@@ -51,6 +51,7 @@ export const columnString6 = '9(2)';
 // Configuração que inclui os segmentos mockados
 export const mockLayout = {
     size: 12,
+    sizeWithIdentification: 12,
     lines: mockLayoutConfig,
 };
 

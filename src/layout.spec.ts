@@ -8,7 +8,7 @@ import { itau240 } from '../test/layout-240.test';
 import { cnab500 } from '../test/layout-500.test';
 
 describe('CNAB', () => {
-    let cnab;
+    let cnab: CnabWriter;
 
     beforeEach(() => {
         cnab = new CnabWriter();
@@ -151,7 +151,7 @@ describe('CNAB', () => {
             expect(() => cnab.initialize(itau240)).not.toThrow();
             expect(cnab.initialize(itau240)).toBeUndefined();
             expect(cnab.layout.size).toBe(itau240.size);
-            expect(cnab.layout.lines.header.layout).toEqual(expect.arrayContaining([expect.any(Object)]));
+            expect(cnab.layout.lines.header_arquivo.layout).toEqual(expect.arrayContaining([expect.any(Object)]));
         });
 
         it('should build the layout correctly cnab500', () => {
@@ -174,7 +174,7 @@ describe('CNAB', () => {
             it('should check line', () => {
                 cnab.initialize(itau240);
 
-                const result = cnab._checkLineLayout(cnab.getLineLayout('header'));
+                const result = cnab._checkLineLayout(cnab.getLineLayout('header_arquivo'), cnab.layout);
                 expect(result).toBe(true);
             });
         });

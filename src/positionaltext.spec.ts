@@ -1,6 +1,7 @@
 import { map, omit, pick } from 'lodash';
 
 import { Cnab } from './cnab';
+import { PositionalText } from './positionaltext';
 import { ERROR_CODE } from './enum/error';
 
 import {
@@ -30,7 +31,7 @@ describe('CNAB', () => {
     let cnab;
 
     beforeEach(() => {
-        cnab = new Cnab();
+        cnab = new PositionalText();
         cnab._setConfig(mockLayout);
     });
 
@@ -100,13 +101,13 @@ describe('CNAB', () => {
 
         it('should check line', () => {
             cnab._buildLayout();
-            const result = cnab._checkLineLayout(mockLayoutConfig.A);
+            const result = cnab._checkLineLayout(mockLayoutConfig.A, mockLayout);
             expect(result).toBe(true);
         });
 
         it('should check line length', () => {
             cnab._buildLayout();
-            const result = cnab._checkLineLength(mockLayoutConfig.A);
+            const result = cnab._checkLineLength(mockLayoutConfig.A, mockLayout);
             expect(result).toBe(true);
         });
 

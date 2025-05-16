@@ -8,6 +8,7 @@ export const COLUMN_TYPE_KEY = {
     N: 'N',
     // alias used to replicate layout documented as is
     '9': 'N',
+    A: 'X',
 };
 
 export enum COLUMN_FILL {

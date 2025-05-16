@@ -2,7 +2,7 @@ import { DIRECTION } from '../enum/direction';
 import { COLUMN_REQUIREMENT_TYPE } from '../enum/columnType';
 
 export interface ColumnsLayoutInputInterface {
-    [key: number]: string | ColumnLayoutInterface;
+    [key: number | string]: string | ColumnLayoutInterface;
 }
 
 export interface ColumnsLayoutInterface {
