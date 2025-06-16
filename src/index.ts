@@ -1,5 +1,6 @@
 export * from './cnab';
 export * from './writer';
+export * from './reader';
 
 export * from './interface/column';
 export * from './interface/layout';

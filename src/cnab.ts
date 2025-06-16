@@ -61,7 +61,7 @@ export class Cnab extends PositionalText {
     }
 
     isAutoIdentificationActivated(layoutConfig: Partial<LayoutInputInterface>): boolean {
-        return !!layoutConfig?.autoIdentification === true;
+        return !!layoutConfig?.autoIdentification;
     }
 
     getLineIdentificationOrDefault(idConfig: IdentificationConfigInterface): IdentificationConfigInterface {

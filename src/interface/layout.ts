@@ -8,7 +8,7 @@ export interface IdentificationConfigInterface extends Array<number> {
 
 export interface LayoutGenericInterface {
     size: number;
-    autoIdentification?: boolean;
+    autoIdentification?: boolean | number;
     sizeWithIdentification?: number;
     idLine?: IdentificationConfigInterface;
     idSegment?: IdentificationConfigInterface;
