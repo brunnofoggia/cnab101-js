@@ -77,7 +77,7 @@ describe('CnabReader', () => {
 
             const result = cnabReader.readLineWithKeys(line, lineKey, segmentKey);
 
-            expect(result).toEqual({
+            expect(result.json).toEqual({
                 first: '123',
                 second: '456',
                 third: '7890',
@@ -115,6 +115,22 @@ describe('CnabReader', () => {
             expect(result.lineKey).toBe('header_arquivo');
 
             expect(result.json).toStrictEqual(banese_header_arquivo_json);
+        });
+
+        it('should throw an error if the line ID is NOT LOCATED', () => {
+            const line = 'some random line';
+            const layoutInput = itau240;
+            cnabReader.initialize(layoutInput);
+
+            expect(() => cnabReader.readLineById(line)).toThrowCode(ERROR_CODE.ID_NOT_FOUND);
+        });
+
+        it('should throw an error if the line is incomplete', () => {
+            const line = '00some incomplete line with ids first';
+            const layoutInput = itau240;
+            cnabReader.initialize(layoutInput);
+
+            expect(() => cnabReader.readLineById(line)).toThrowCode(ERROR_CODE.LINE_LENGTH_INVALID);
         });
     });
 });

@@ -25,6 +25,8 @@ export class CnabReader extends Cnab {
     _readLine(line: string, columnsLayout: ColumnsLayoutInterface) {
         const json = {};
 
+        let lastColumnEnd: number = 0;
+
         // let start = 0;
         for (const index in columnsLayout) {
             const columnLayout = columnsLayout[index];
@@ -32,6 +34,11 @@ export class CnabReader extends Cnab {
             // const value = line.substring(start, end);
             json[columnLayout.key] = this.readColumn(line, columnLayout);
             // start = end;
+            lastColumnEnd = columnLayout.end;
+        }
+
+        if (line.length < lastColumnEnd) {
+            throw new Err(`Line is incomplete. Line length: ${line.length}. Length expected ${lastColumnEnd}`, ERROR_CODE.LINE_LENGTH_INVALID);
         }
 
         return json;
@@ -42,7 +49,10 @@ export class CnabReader extends Cnab {
         if (!size(columnsLayout))
             throw new Err(`Columns layout not found for line: "${lineKey}" and segment: "${segmentKey}"`, ERROR_CODE.COLUMN_LAYOUT_NOT_FOUND);
 
-        return this._readLine(line, columnsLayout);
+        const lineConfig = this.layout.lines[lineKey];
+        const segmentConfig = segmentKey ? lineConfig?.segments?.[segmentKey] : null;
+        const layoutConfig = segmentConfig?.layout || lineConfig.layout;
+        return { lineKey, lineConfig, segmentKey, segmentConfig, layoutConfig, json: this._readLine(line, columnsLayout) };
     }
 
     readLineById(line: string) {
