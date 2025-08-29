@@ -122,7 +122,7 @@ describe('CnabReader', () => {
             const layoutInput = itau240;
             cnabReader.initialize(layoutInput);
 
-            expect(() => cnabReader.readLineById(line)).toThrowCode(ERROR_CODE.ID_NOT_FOUND);
+            expect(() => cnabReader.readLineById(line)).toThrowCode(ERROR_CODE.ID_LINE_NOT_FOUND);
         });
 
         it('should throw an error if the line is incomplete', () => {

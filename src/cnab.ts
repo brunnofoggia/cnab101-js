@@ -86,7 +86,17 @@ export class Cnab extends PositionalText {
                 return { itemKey, itemConfig };
             }
         }
-        throw new Err(`No matching layout key/config found for ID: "${id}"`, ERROR_CODE.ID_NOT_FOUND);
+        return;
+    }
+
+    checkLineLayout(id: string, lineLayout: LineLayoutInterface): boolean {
+        if (!lineLayout) throw new Err(`No matching layout key/config found for LINE ID: "${id}"`, ERROR_CODE.ID_LINE_NOT_FOUND);
+        return true;
+    }
+
+    checkSegmentLayout(id: string, segmentLayout: LineLayoutInterface): boolean {
+        if (!segmentLayout) throw new Err(`No matching layout key/config found for SEGMENT ID: "${id}"`, ERROR_CODE.ID_SEGMENT_NOT_FOUND);
+        return true;
     }
     // #endregion
 }

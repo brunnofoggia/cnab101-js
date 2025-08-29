@@ -170,7 +170,7 @@ describe('CnabWriter', () => {
             expect.assertions(1);
             const cnabWriter = new CnabWriter();
             cnabWriter.initialize(threeColumnsLayoutWithId);
-            expect(() => cnabWriter.writeLineById(threeColumnsJson)).toThrowCode(ERROR_CODE.ID_NOT_FOUND);
+            expect(() => cnabWriter.writeLineById(threeColumnsJson)).toThrowCode(ERROR_CODE.ID_LINE_MISSING);
         });
 
         it('should write a line correctly', () => {

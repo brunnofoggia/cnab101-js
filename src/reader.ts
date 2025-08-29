@@ -86,7 +86,11 @@ export class CnabReader extends Cnab {
     defineLineLayoutById(line: string): { lineId: string; lineKey: string; lineConfig: LineLayoutInterface } {
         const idConfig = this.getLineIdentificationOrDefault(this.layout.idLine);
         const lineId = this.findIdentification(line, idConfig);
-        const { itemKey: lineKey, itemConfig: lineConfig } = this.defineKeyById(lineId, this.layout.lines);
+
+        const lineData = this.defineKeyById(lineId, this.layout.lines);
+        this.checkLineLayout(lineId, lineData?.itemConfig);
+        const { itemKey: lineKey, itemConfig: lineConfig } = lineData;
+
         return { lineId, lineKey, lineConfig };
     }
 
@@ -97,6 +101,7 @@ export class CnabReader extends Cnab {
             const segmentId = this.findIdentification(line, idConfig);
 
             const segmentData = this.defineKeyById(segmentId, lineConfig.segments);
+            this.checkSegmentLayout(segmentId, segmentData?.itemConfig);
             segmentKey = segmentData.itemKey;
             segmentConfig = segmentData.itemConfig;
         }

@@ -24,8 +24,8 @@ const posisional500Sample: LayoutInputInterface = {
     // A primeira dúvida que pode surgir sobre a autoidentificação é: "E se a minha coluna de identificação não for a primeira?"
     // Você pode especificar a coluna de identificação de linha e segmento, de acordo com a sua necessidade, pois ambas são opcionais.
     // O mais comum é que a coluna de identificação seja a primeira, e dos segmentos a segunda, mas existem casos em que elas podem estar em outras posições.
-    idLine: [7, 1], // Posição 7 e tamanho 1
-    idSegment: [9, 1], // Posição 9 e tamanho 1
+    idLine: [0, 1], // Posição 1 e tamanho 1
+    idSegment: [1, 1], // Posição 2 e tamanho 1
     // Definição das linhas do layout
     // As linhas são definidas como um objeto onde cada chave é o nome da linha e o valor é um objeto ou array que define o layout da linha.
     // Existem duas formas de definir o layout das linhas: como um objeto ou como um array.
@@ -34,6 +34,7 @@ const posisional500Sample: LayoutInputInterface = {
     // Por isso, a forma mais *precisa* de definir o layout das linhas é como um array
     lines: {
         header: {
+            id: "0",
             // Aqui definimos o layout da linha de header aonde foi aplicada a forma de array.
             layout: [
                 // Neste exemplo de coluna temos a utilização do valor padrão, muitas vezes citado como "valor fixo" no documento, para a coluna.
@@ -49,7 +50,37 @@ const posisional500Sample: LayoutInputInterface = {
                 'brancos_01, X(485)',
                 'seq_registro, 9(6)'
             ],
-        }
+        },
+        detail: {
+            id: "1",
+            // Aqui definimos o layout da linha de detail aonde são exemplificados os segmentos
+            // os segmentos sao diferentes tipos de detalhes no CNAB, podendo cada um ter um layout diferente, identificado a partir do codigo do segmento.
+            segments: {
+                segmento_a: {
+                    // esse é o codigo que irá automatizar a identificação do tipo de linha a ser lida ou escrita
+                    id: "A",
+                    // o layout funciona da mesma forma que os demais, como header ou trailer.
+                    layout: [
+                        '_id_line, 9(1), 0',
+                        '_id_segment, X(1), A',
+                        'arquivo_remessa, X(7), REM.TST',
+                        'brancos_01, X(485)',
+                        'seq_registro, 9(6)'
+                    ],
+                },
+                segmento_b: {
+                    id: "B",
+                    // o layout de um segmento pode ser diferente do outro
+                    layout: [
+                        '_id_line, 9(1), 0',
+                        '_id_segment, X(1), B',
+                        'arquivo_remessa, X(7), REM.TST',
+                        'brancos_01, X(485)',
+                        'seq_registro, 9(6)'
+                    ],
+                },
+            }
+        },
         trailler: {
             // Aqui aplicamos o objeto como forma de definir o layout da linha, para deixar exemplificado, caso você queira utilizar essa forma de definição.
             layout: {
@@ -57,7 +88,7 @@ const posisional500Sample: LayoutInputInterface = {
                 brancos_01: 'X(493)',
                 seq_registro: '9(6)'
             },
-        },
+        }
     }
 };
 ```

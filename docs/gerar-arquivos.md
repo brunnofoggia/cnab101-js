@@ -28,7 +28,9 @@ const layout = {
         header: {
             id: '0',
             layout: [
+                // o nome fixo para o campo de identificacao da linha é _id_line
                 '_id_line, 9(1), 0',
+                // os campos abaixo sao somente exemplos
                 'id_remessa, 9(1), 1',
                 'literal_remessa, X(7), REM.TST',
                 'cod_servico, 9(2), 1',
@@ -44,6 +46,33 @@ const layout = {
                 'brancos_02, X(377)',
                 'seq_registro, 9(6), 1',
             ],
+        },
+        detail: {
+            id: '3',
+            segments: {
+                segment_a: {
+                    layout: [
+                        '_id_line, 9(1), 0',
+                        // o nome fixo para o campo de identificacao do segmento é _id_segment
+                        '_id_segment, 9(1), 1',
+                        // os campos abaixo sao somente exemplos
+                        'id_remessa, 9(1), 1',
+                        'literal_remessa, X(7), REM.TST',
+                        'cod_servico, 9(2), 1',
+                        'literal_servico, X(15), COBRANCA',
+                        'cod_empresa, 9(20), 1',
+                        'nome_empresa, X(30), EMPRESA TESTE',
+                        'cod_banco, 9(3), 341',
+                        'nome_banco, X(15), PAULISTA S.A.',
+                        'data_gravacao, 9(6), 0',
+                        'brancos_01, X(8)',
+                        'id_sistema, X(2)',
+                        'seq_arquivo, 9(7), 1',
+                        'brancos_02, X(377)',
+                        'seq_registro, 9(6), 1',
+                    ],
+                }
+            }
         },
     },
 };

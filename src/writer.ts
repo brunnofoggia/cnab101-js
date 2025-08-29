@@ -99,9 +99,12 @@ export class CnabWriter extends Cnab {
     // #region Identification
     defineLineLayoutById(json: any) {
         const lineId = json['_id_line'];
+        if (!lineId) throw new Err(`Line id is missing`, ERROR_CODE.ID_LINE_MISSING);
 
-        if (!lineId) throw new Err(`Line id is missing`, ERROR_CODE.ID_NOT_FOUND);
-        const { itemKey: lineKey, itemConfig: lineConfig } = this.defineKeyById(lineId, this.layout.lines);
+        const lineData = this.defineKeyById(lineId, this.layout.lines);
+        this.checkLineLayout(lineId, lineData?.itemConfig);
+        const { itemKey: lineKey, itemConfig: lineConfig } = lineData;
+
         return { lineId, lineKey, lineConfig };
     }
 
@@ -109,9 +112,10 @@ export class CnabWriter extends Cnab {
         let segmentId, segmentKey, segmentConfig;
         if (lineConfig.segments) {
             segmentId = json._id_segment || null;
-            if (!segmentId) throw new Err(`Segment id is missing`, ERROR_CODE.ID_NOT_FOUND);
+            if (!segmentId) throw new Err(`Segment id is missing`, ERROR_CODE.ID_SEGMENT_MISSING);
 
             const segmentData = this.defineKeyById(segmentId, lineConfig.segments);
+            this.checkSegmentLayout(segmentId, segmentData?.itemConfig);
             segmentKey = segmentData.itemKey;
             segmentConfig = segmentData.itemConfig;
         }
