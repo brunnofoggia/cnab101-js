@@ -259,12 +259,12 @@ describe('CnabWriter', () => {
 
         it('should not throw an error when value is undefined and ignored', () => {
             const config = { ...columnConfig, required: COLUMN_REQUIREMENT.IGNORED };
-            expect(() => cnabWriter._checkValueInvalid(undefined, config)).not.toThrowError();
+            expect(() => cnabWriter._checkValueInvalid(undefined, config)).not.toThrow();
         });
 
         it('should not throw an error when value is null and ignored', () => {
             const config = { ...columnConfig, required: COLUMN_REQUIREMENT.IGNORED };
-            expect(() => cnabWriter._checkValueInvalid(null, config)).not.toThrowError();
+            expect(() => cnabWriter._checkValueInvalid(null, config)).not.toThrow();
         });
     });
 
@@ -282,7 +282,7 @@ describe('CnabWriter', () => {
 
         it('should not throw an error when value is undefined and ignored', () => {
             expect.assertions(2);
-            const expectFn = (config) => expect(() => cnabWriter._checkValueFill(undefined, config)).not.toThrowError();
+            const expectFn = (config) => expect(() => cnabWriter._checkValueFill(undefined, config)).not.toThrow();
 
             let config;
             config = { ...columnConfig, required: COLUMN_REQUIREMENT.IGNORED };
@@ -304,7 +304,7 @@ describe('CnabWriter', () => {
 
         it('should not throw an error when value is undefined and ignored', () => {
             expect.assertions(3);
-            const expectFn = (config) => expect(() => cnabWriter._checkValueSize(undefined, config)).not.toThrowError();
+            const expectFn = (config) => expect(() => cnabWriter._checkValueSize(undefined, config)).not.toThrow();
 
             let config;
             config = { ...columnConfig, required: COLUMN_REQUIREMENT.IGNORED };
