@@ -49,7 +49,7 @@ export class CnabWriter extends Cnab {
     }
 
     writeLine(json, lineKey = '', segmentKey = '') {
-        if (this.isAutoIdentificationActivated(this.layout)) {
+        if ((!lineKey && !segmentKey) || this.isAutoIdentificationActivated(this.layout)) {
             return this.writeLineById(json);
         }
 
